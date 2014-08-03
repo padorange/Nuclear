@@ -7,16 +7,16 @@
     <script type="text/javascript" src="./jquery.js" charset="utf-8"></script>
 	<script type="text/javascript" src="./heatmap.js" charset="utf-8"></script>
     <script type="text/javascript" src="./nuke_map.js" charset="utf-8"></script>
-  	<title>Centrales Nucl&eacute;aires autour du monde</title>
+  	<title>Fili&egrave;res Nucl&eacute;aires autour du monde</title>
 </head>
   	<body onLoad="init()">
 		<div id="logo">
-			<h1>Centrales Nucléaires autour du monde</h1>
-			<p>Avec un rayon de 100 kilomètres autour</p>
+			<h1>Filières Nucléaires autour du monde</h1>
+			<p>Avec un rayon de 100 kilomètres autour des centrales</p>
 	</div>
 	<div id="map"></div>
 	<div id="about">
-		<p><em><a href="about.html">A propos de la carte</a> :: Donn&eacute;es extraites de <a href="http://www.openstreetmap.org/?lat=45.6976&lon=-0.328&zoom=14&layers=M">OpenStreetMap</a>
+		<p><em><a href="about.html">A propos de la carte</a> :: Donn&eacute;es extraites de <a href="http://www.openstreetmap.org/">OpenStreetMap</a>
 		<script type="text/javascript">
 		<!--
 			/* get the modification date of the cctv.txt file */
@@ -42,14 +42,21 @@
 		$connect = mysql_connect($server,$login,$pwd) or die("connect error : ".mysql_error());
 		mysql_select_db($database,$connect) or die("select db : ".mysql_error()) ;
 
-		$query="select * from nuke where country='france' order by name";
+		$query="select * from nuke where country='france' order by type,name";
 					
 		$result = mysql_query($query,$connect) or die("select error : ".mysql_error());
-		echo "<div id='list'>Centrales Françaises<ul>";
+		echo "<div id='list'>Filières Françaises<ul>";
+		$last="";
 		while ($row = mysql_fetch_array($result))
 		{
 			$lat=$row[latitude];
 			$lon=$row[longitude];
+			$t=$row[type];
+			if ($t!=$last)
+			{
+				echo '<li><b>'.$t.'</b></li>';
+				$last=$t;
+			}
 			echo '<li><b><a href="http://www.leretourdelautruche.com/map/nuke/index.php?zoom=15&lat='.$lat.'&lon='.$lon.'">'.$row[name].'</a></b></li>';
 		}
 		echo '</ul></div>';

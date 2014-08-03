@@ -1,0 +1,32 @@
+<osm-script timeout="3600" output="xml">
+<union>
+    <query type="node">
+      <has-kv k="generator:source" v="nuclear"/>
+   </query>
+    <query type="way">
+      <has-kv k="generator:source" v="nuclear"/>
+    </query>
+   <recurse type="way-node"/>
+    <query type="relation">
+      <has-kv k="generator:source" v="nuclear"/>
+    </query>
+    <query type="node">
+      <has-kv k="power" v="generator"/>
+      <has-kv k="power_source" v="nuclear"/>
+   </query>
+    <query type="way">
+      <has-kv k="power" v="generator"/>
+      <has-kv k="power_source" v="nuclear"/>
+    </query>
+   <recurse type="way-node"/>
+    <query type="relation">
+     <has-kv k="power" v="generator"/>
+      <has-kv k="power_source" v="nuclear"/>
+    </query>
+</union>
+<union>
+   <item/>
+   <recurse type="down"/>
+</union>
+<print mode="meta" order="quadtile"/>
+</osm-script>

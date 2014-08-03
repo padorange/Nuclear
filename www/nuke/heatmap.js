@@ -112,13 +112,13 @@ Heatmap.Layer = OpenLayers.Class(OpenLayers.Layer, {
     this.canvas = document.createElement('canvas');
     this.canvas.style.position = 'absolute';
     this.defaultRadius = 20;
-    this.defaultIntensity = 0.2;
+    this.defaultIntensity = 0.3;
     this.setGradientStops({
       0.00: 0xffff0000,
-      0.10: 0xffff00ff,
-      0.25: 0xffc200ff,
-      0.50: 0xff8000ff,
-      0.75: 0xff3b00ff,
+      0.10: 0xffff0040,
+      0.35: 0xffc20080,
+      0.60: 0xff8000ff,
+      0.80: 0xff3b00ff,
       1.00: 0xff0000ff,
     });
 	/*

@@ -1,27 +1,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-  <title>Inventaire de la vid&eacute;osurveillance en France</title>
+  <title>Carte de la fili&egrave;res nucl&eacute;aires &agrave; travers le monde</title>
 	<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
   	<link rel="icon" type="image/png" href="cctv.ico" />
 </head>
   <body>
-		<h1><img src="nuclear.png" alt="" name="" width="80" height="80" hspace="10" align="absmiddle">Carte des centrales nucl&eacute;aires &agrave; travers le monde</h1>
-		<p><a href="index.php">Retour au projet</a></p>
-<p>Cette carte repr&eacute;sente l'emplacement des centrales nucl&eacute;aires r&eacute;f&eacute;renc&eacute;es dans les bases de donn&eacute;es <em><a href="http://openstreetmap.org/">OpenStreetMap</a></em>.</p>
+		<h1><img src="nuclear.png" alt="" name="" width="80" height="80" hspace="10" align="absmiddle">Carte de la fili&egrave;re nucl&eacute;aires &agrave; travers le monde</h1>
+  <p><a href="index.php">Retour &agrave; la carte</a></p>
+<p>Cette carte repr&eacute;sente l'emplacement des installations nucl&eacute;aires r&eacute;f&eacute;renc&eacute;es dans la base de donn&eacute;es g&eacute;ographique <em><a href="http://openstreetmap.org/">OpenStreetMap</a></em>.</p>
 <ul>
-	<li>Ces donn&eacute;es sont extraites par le biais d'un script python et d'une interrogation via le service <a href="http://wiki.openstreetmap.org/wiki/Xapi">XAPI</a>.</li>
-	<li>Les icones repr&eacute;sentent chaque centrale, les icones jaune et noir les centrales actives, les icones grises les centrales arr&ecirc;t&eacute;es.</li>
-	<li>Autour de chaque centrale un cercle de couleur (d&eacute;grad&eacute; du rouge au jaune) marque une zone de 100 km autour de la centrale.</li>
-</ul>
+	<li>Ces donn&eacute;es sont extraites par le biais d'un script python et d'une interrogation via le service <a href="http://wiki.openstreetmap.org/wiki/Xapi">Overpass API</a>.</li>
+	<li>Les icones repr&eacute;sentent chaque installation, les icones color&eacute;s les installations actives, les icones grises les installations arr&ecirc;t&eacute;es (mais sous surveillence).</li>
+	<li>Autour de chaque centrale nucl&eacute;aire un cercle de couleur (d&eacute;grad&eacute; du rouge au jaune) marque une zone de 100 km, potentiellement dangereuse en cas d'accident grave.</li>
+	<li>Sont repr&eacute;sent&eacute;s :
+		<ul>
+			<li>Les mines d'uranium</li>
+			<li>Les usines de traitement et d'enrichissemnt de l'uranium</li>
+			<li>Les centrales nucl&eacute;aires</li>
+			<li>Les centres de retraitement et de stockage des d&eacute;chets radioactifs</li>
+			<li>Les sites d'explosions nucl&eacute;aires</li>
+		</ul>
+	</li>
+  </ul>
 <h2>Extraction des donn&eacute;es.</h2>
 <p>Les donn&eacute;es repr&eacute;sent&eacute;es sont extraites de la g&eacute;olocalisation r&eacute;alis&eacute;e par les contributeurs du projet <em><a href="http://openstreetmap.org/">OpenStreetMap</a></em>.<br>
-	Si vous remarquez des erreurs, vous pouvez contribuer au projet <em><a href="http://openstreetmap.org/">OpenStreetMap</a></em> et ajouter, modifier les donn&eacute;es des centrales nucl&eacute;aires.</p>
+	Si vous remarquez des erreurs de donn&eacute;es, vous pouvez contribuer au projet <em><a href="http://openstreetmap.org/">OpenStreetMap</a></em> et ainsi ajouter, modifier les donn&eacute;es des installations nucl&eacute;aires et de tout autres objets g&eacute;ographiques.</p>
 <p>Dans OpenStreepMap chaque &eacute;l&eacute;ment est marqu&eacute; par des couples cl&eacute;s-valeurs (cl&eacute;=valeur) permettant de sp&eacute;cifier l'objet g&eacute;ographique.</p>
 <p>Ainsi les centrales &eacute;lectriques sont rep&eacute;r&eacute;s par :</p>
 <ul>
 	<li><a href="http://wiki.openstreetmap.org/wiki/Tag:power%3Dgenerator">power=generator</a></li>
 </ul>
-<p>Si cette centrale est nucl&eacute;aire sont ajout&eacute;s :</p>
+<p>Si cette centrale est nucl&eacute;aire est ajout&eacute;s :</p>
 <ul>
 	<li><a href="http://wiki.openstreetmap.org/wiki/Key:generator:source">generator:source</a> = nuclear (ou anciennement power_source = nuclear)</li>
 </ul>
@@ -48,7 +57,9 @@
 	<li>wikipedia = http://fr.wikipedia.org/wiki/Centrale_nucl&eacute;aire_du_Blayais</li>
 	<li>start_date = 1981</li>
   </ul>
-<p><a href="index.php">Retour au projet</a></p>
+<h2>Code</h2>
+<p>Le code est sous licence New-BSD, disponible sur <a href="https://github.com/padorange/Nuclear">GitHub</a></p>
+<p><a href="index.php">Retour &agrave; la carte</a></p>
 <p>&nbsp;</p>
 </body>
 </html>

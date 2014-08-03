@@ -1,0 +1,18 @@
+<osm-script timeout="1800" output="xml">
+<union>
+    <query type="node">
+      <has-kv k="military" v="nuclear_explosion_site"/>
+    </query>
+    <query type="way">
+      <has-kv k="military" v="nuclear_explosion_site"/>
+    </query>
+    <recurse type="way-node"/>
+    <query type="relation">
+      <has-kv k="military" v="nuclear_explosion_site"/>
+    </query>
+   <recurse type="relation-node" into="nodes"/>
+   <recurse type="relation-way"/>
+   <recurse type="way-node"/>
+</union>
+<print mode="meta" order="quadtile"/>
+</osm-script>

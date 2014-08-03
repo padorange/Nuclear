@@ -1,0 +1,18 @@
+<osm-script timeout="1800" output="xml">
+<union>
+    <query type="node">
+      <has-kv k="resource" v="uranium"/>
+   </query>
+    <query type="way">
+      <has-kv k="resource" v="uranium"/>
+    </query>
+   <recurse type="way-node"/>
+    <query type="relation">
+     <has-kv k="resource" v="uranium"/>
+    </query>
+   <recurse type="relation-node" into="nodes"/>
+   <recurse type="relation-way"/>
+   <recurse type="way-node"/>
+</union>
+<print mode="meta" order="quadtile"/>
+</osm-script>

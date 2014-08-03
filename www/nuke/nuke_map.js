@@ -8,6 +8,7 @@
 	OpenLayers : <http://openlayers.org/>
 */
 
+// URL (PHP script) called to retrieve data (from MySQL)
 var request_url="http://www.leretourdelautruche.com/map/nuke/nuke_request.php";
 
 // complex map object
@@ -47,9 +48,18 @@ function getNukeHeatMap() {
 
 	  zoom=map.getZoom();
 	  if (zoom != previousZoomLevel) {
-		heat.defaultRadius = 5*rayonNuke / (3*map.getResolution());
-		//console.log("\tres :"+map.getResolution());
-		//console.log("heat radius : "+heat.defaultRadius);
+	  	if ((zoom<4) || (zoom>9))
+	  	{
+			heat.defaultRadius = 0;
+			heat.setVisibility(false);
+	  	}
+	  	else
+	  	{
+			heat.setVisibility(true);
+			heat.defaultRadius = 5*rayonNuke / (3*map.getResolution());
+			//console.log("\tres :"+map.getResolution());
+			//console.log("heat radius : "+heat.defaultRadius);
+		}
 		previousZoomLevel = zoom;
 	  }
 	  bbox=map.getExtent().transform(map.projection, map.displayProjection);
@@ -57,8 +67,9 @@ function getNukeHeatMap() {
 	  bbox.left=bbox.left-rayonNuke;
 	  bbox.bottom=bbox.bottom+rayonNuke;
 	  bbox.right=bbox.right+rayonNuke;
+	  type="power";
 	  OpenLayers.Request.GET({ 
-		  			params: {"t" : bbox.top, "l":bbox.left, "b":bbox.bottom, "r":bbox.right, "z":zoom},
+		  			params: {"t" : bbox.top, "l":bbox.left, "b":bbox.bottom, "r":bbox.right, "z":zoom, "tt":type},
 		  			url: request_url,
 		  			success : parseNukeResponse
 		   });
@@ -151,7 +162,8 @@ function listener(evt) {
            + "&l=" + tlLonLat.lon
            + "&t=" + tlLonLat.lat
            + "&r=" + brLonLat.lon
-           + "&b=" + brLonLat.lat;
+           + "&b=" + brLonLat.lat
+		   + "&tt=all";
 	  //console.log(url);
 
       // GET and process some markers
@@ -253,7 +265,6 @@ function init(){
  			
 	// get map rendered layers (from OSM : mapnik and tiles@Home + from OpenMapQuest)
 	var layerMapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
-	var layerTah = new OpenLayers.Layer.OSM.Osmarender("Osmarender");
 	var mapquest = new OpenLayers.Layer.OSM.OpenMapQuest("OpenMapQuest");
 	
 	var style = new OpenLayers.Style({
@@ -261,7 +272,7 @@ function init(){
 									 });
 	
 	// create a marker layer from text data using the correct projection (from map display)
-	nuke_markers = new OpenLayers.Layer.Markers( "Centrales");
+	nuke_markers = new OpenLayers.Layer.Markers("Filières");
 	nuke_markers.setIsBaseLayer(false);
 	nuke_markers.setVisibility(true);	
 
@@ -277,10 +288,9 @@ function init(){
 	map.events.register("moveend", this, listener);
 
 	// add the layers to the map
-	map.addLayers([layerMapnik,layerTah,mapquest,heat,nuke_markers]);
+	map.addLayers([layerMapnik,mapquest,heat,nuke_markers]);
  
  	// position the map to the default view
 	var lonLat = new OpenLayers.LonLat(lon, lat).transform(map.displayProjection,  map.projection);
 	if (!map.getCenter()) map.setCenter (lonLat, zoom);
-
 }
