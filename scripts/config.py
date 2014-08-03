@@ -6,8 +6,10 @@
 	General config file to upload data with FTP
 """
 
-ftp_host="ftp.leretourdelautruche.com"
-ftp_user="leretour"
-ftp_password="63UvekXN"
+ftp_host="yourftp.com"
+ftp_user="your_user"
+ftp_password="your_password"
 ftp_directory="/www/map/nuke/"
 icons_url="http://www.leretourdelautruche.com/map/icons/"
+
+data_directory="./data"
